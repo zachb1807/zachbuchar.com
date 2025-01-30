@@ -23,13 +23,14 @@ const blog = defineCollection({
 
 const projects = defineCollection({
   type: "content",
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     summary: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()),
+    image: image(),
     draft: z.boolean().optional(),
-    demoUrl: z.string().optional(),
+    websiteUrl: z.string().optional(),
     repoUrl: z.string().optional(),
   }),
 })
