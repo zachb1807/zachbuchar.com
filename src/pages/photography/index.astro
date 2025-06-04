@@ -4,25 +4,21 @@ import PageLayout from "@layouts/PageLayout.astro"
 import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Blog from "@components/Blog"
-import { BLOG } from "@consts"
+import { BLOG, PHOTOGRAPHY } from "@consts"
+import Photography from "@components/Photography"
 
-const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-
-const tags = [...new Set(posts.flatMap(post => post.data.tags))]
-  .sort((a, b) => a.localeCompare(b))
+const albums = (await getCollection("albums"))
 ---
 
-<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+<PageLayout title={PHOTOGRAPHY.TITLE} description={PHOTOGRAPHY.DESCRIPTION}>
   <TopLayout>
     <div class="animate page-heading">
-      {BLOG.TITLE}
+      {PHOTOGRAPHY.TITLE}
     </div>
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Blog client:load tags={tags} data={posts} />
+      <Photography client:load data={albums} />
     </div>
   </BottomLayout>
 </PageLayout>

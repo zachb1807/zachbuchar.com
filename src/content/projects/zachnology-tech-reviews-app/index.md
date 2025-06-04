@@ -1,6 +1,6 @@
 ---
 title: "Zachnology Tech Reviews App"
-summary: "Companion app for the podcast"
+summary: "Full companion app for the podcast"
 date: "Aug 18 2022"
 draft: false
 tags:

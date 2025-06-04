@@ -19,6 +19,11 @@ export const BLOG: Page = {
   DESCRIPTION: "Writing on topics I am passionate about.",
 }
 
+export const PHOTOGRAPHY: Page = {
+  TITLE: "Photography",
+  DESCRIPTION: "My photography portfolio.",
+}
+
 // Projects Page 
 export const PROJECTS: Page = {
   TITLE: "Projects",
