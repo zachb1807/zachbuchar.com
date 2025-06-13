@@ -1,0 +1,25 @@
+import type { CollectionEntry } from "astro:content"
+import { createEffect, createSignal, For } from "solid-js"
+import ArrowCard from "@components/ArrowCard"
+import { cn } from "@lib/utils"
+import AlbumCard from "./AlbumCard"
+import { getAlbumImages } from "../utils/albums"
+
+
+type PhotoCardProps = {
+    photo: ImageMetadata;
+    clickSupplier?: (photo: ImageMetadata) => void;
+};
+
+export default function PhotoCard({ photo, clickSupplier }: PhotoCardProps) {
+    return (
+            <div
+                class={`flex items-center justify-center aspect-square rounded-md relative bg-cover bg-blend-multiply transition-colors cursor-pointer`}
+                style={{ "background-image": `url(${photo.src})` }}
+            >
+                <div class="text-white z-10 text-center transition-all duration-300 ease-in-out overflow-hidden">
+                </div>
+            </div>
+
+    )
+}
