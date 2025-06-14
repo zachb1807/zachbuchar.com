@@ -1,0 +1,31 @@
+---
+import { getImage } from "astro:assets";
+import Lightbox from "./Lightbox";
+const { data } = Astro.props;
+
+const imageImports = import.meta.glob("../content/albums/**/*.{jpg,jpeg,png,gif,webp,JPG}", {
+  eager: true
+});
+
+const rawImages = Object.values(imageImports).map((mod: any) => mod.default);
+
+// For each image, generate a placeholder (e.g., small 100px wide version)
+const allImages = await Promise.all(
+  rawImages.map(async (img) => {
+    // Using Astro's getImage API to generate a small placeholder
+    const placeholderImage = await getImage({
+      src: img,
+      height: 200, // Adjust height as needed
+      width: 200, // Adjust width as needed
+      format: "webp", // or keep original format
+
+    });
+
+    return {
+      src: img.src, // full-size original
+      placeholder: placeholderImage.src, // small placeholder
+    };
+  })
+);
+---
+<Lightbox client:load images={allImages} />

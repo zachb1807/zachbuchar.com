@@ -19,7 +19,7 @@ export default function AlbumCard({ entry }: Props) {
       onMouseEnter={() => setIsDateShow(true)}
       onMouseLeave={() => setIsDateShow(false)}
     >
-      {/* <img src={cover.src} alt="" class=" aspect-square object-cover rounded-md  brightness-50" /> */}}
+      {/* <img src={cover.src} alt="" class=" aspect-square object-cover rounded-md  brightness-50" /> */}
       <div class="text-white z-10 text-center transition-all duration-300 ease-in-out overflow-hidden">
         <div>{entry.data.title}</div>
         <div class={`text-sm transition-all duration-400 ease-out ${isDateShown() ? 'max-h-96' : 'h-0 opacity-0'}`}>{formatDate(entry.data.date)}</div>

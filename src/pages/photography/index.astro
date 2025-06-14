@@ -5,7 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Blog from "@components/Blog"
 import { BLOG, PHOTOGRAPHY } from "@consts"
-import Photography from "@components/Photography"
+import Photography from "@components/Photography.astro"
 
 const albums = (await getCollection("albums"))
 ---
@@ -18,7 +18,7 @@ const albums = (await getCollection("albums"))
   </TopLayout>
   <BottomLayout>
     <div class="animate">
-      <Photography client:load data={albums} />
+      <Photography data={albums} />
     </div>
   </BottomLayout>
 </PageLayout>
