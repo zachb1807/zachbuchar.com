@@ -5,20 +5,47 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import Blog from "@components/Blog"
 import { BLOG, PHOTOGRAPHY } from "@consts"
-import Photography from "@components/Photography.astro"
+import { getImage } from "astro:assets";
+const { data } = Astro.props;
+import Lightbox from "@components/Lightbox"
 
 const albums = (await getCollection("albums"))
+const imageImports = import.meta.glob("../../content/albums/**/*.{jpg,jpeg,png,gif,webp,JPG}", {
+  eager: true
+});
+
+const rawImages = Object.values(imageImports).map((mod: any, path) => mod.default);
+
+// For each image, generate a placeholder (e.g., small 100px wide version)
+const allImages = await Promise.all(
+  rawImages.map(async (img, path) => {
+    // Using Astro's getImage API to generate a small placeholder
+    const placeholderImage = await getImage({
+      src: img,
+      height: 200, // Adjust height as needed
+      width: 200, // Adjust width as needed
+      format: "webp", // or keep original format
+
+    });
+
+    return {
+      src: img.src, // full-size original
+      placeholder: placeholderImage.src, // small placeholder
+
+    };
+  })
+);
 ---
 
 <PageLayout title={PHOTOGRAPHY.TITLE} description={PHOTOGRAPHY.DESCRIPTION}>
   <TopLayout>
-    <div class="animate page-heading">
+    <div class="animate page-heading text-2xl">
       {PHOTOGRAPHY.TITLE}
     </div>
   </TopLayout>
   <BottomLayout>
-    <div class="animate">
-      <Photography data={albums} />
+    <div class="animate relative">
+      <Lightbox client:only images={allImages} />
     </div>
   </BottomLayout>
 </PageLayout>

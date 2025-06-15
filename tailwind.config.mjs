@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         "sans": ["Atkinson", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        xs: "25rem"
+      },
       typography: {
         DEFAULT: {
           css: {
