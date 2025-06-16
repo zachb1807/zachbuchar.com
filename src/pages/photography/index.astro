@@ -28,8 +28,14 @@ const allImages = await Promise.all(
 
     });
 
+    const fullImage = await getImage({
+      src: img,
+      quality: 70, // Adjust quality as needed
+      format: "jpg", // or keep original format
+    });
+
     return {
-      src: img.src, // full-size original
+      src: fullImage.src, // full-size original
       placeholder: placeholderImage.src, // small placeholder
 
     };
